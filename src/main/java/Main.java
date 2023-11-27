@@ -2,6 +2,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+    static String errorMessage = "Значение введено некорректно, пожалуйста, повторите ввод";
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int peopleCount = inputPeopleCount(scanner);
@@ -18,11 +19,11 @@ public class Main {
             try {
                 peopleCount = scanner.nextInt();
                 if (peopleCount <= 1) {
-                    System.out.println("Значение введено некорректно, пожалуйста, повторите ввод");
+                    System.out.println(errorMessage);
                 } else break;
             }
             catch(InputMismatchException e) {
-                System.out.println("Значение введено некорректно, пожалуйста, повторите ввод");
+                System.out.println(errorMessage);
                 scanner.nextLine();
             }
         }
@@ -40,16 +41,17 @@ public class Main {
                 System.out.println("Введите стоимость товара: ");
                 productPrice = scanner.nextDouble();
                 if (productPrice <= 0) {
-                    System.out.println("Значение введено некорректно, пожалуйста, повторите ввод");
+                    System.out.println(errorMessage);
                     scanner.nextLine();
                     continue;
                 }
             }
             catch (InputMismatchException e) {
-                System.out.println("Значение введено некорректно, пожалуйста, повторите ввод");
+                System.out.println(errorMessage);
                 scanner.nextLine();
                 continue;
             }
+            scanner.nextLine();
             calculator.addProduct(new Product(productName, productPrice));
             System.out.println("Хотите добавить ещё один товар? Если нет, введите \"завершить\"");
         }
